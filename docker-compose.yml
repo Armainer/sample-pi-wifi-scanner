@@ -1,0 +1,53 @@
+services:
+  scanner:
+    build: scanner
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    environment:
+      WLAN_IFACE: wlan0
+      SCAN_INTERVAL: "60"
+      DATA_FILE: /data/latest.json
+    volumes:
+      - wifi-scans:/data
+
+  web:
+    build: web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      PGHOST: db
+      PGPORT: "5432"
+      PGDATABASE: wifi
+      PGUSER: wifi
+      PGPASSWORD: wifi-survey
+      DATA_FILE: /data/latest.json
+    volumes:
+      - wifi-scans:/data
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wifi
+      POSTGRES_USER: wifi
+      POSTGRES_PASSWORD: wifi-survey
+    volumes:
+      - wifi-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wifi -d wifi"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+volumes:
+  wifi-scans:
+    driver: local
+  wifi-db:
+    driver: local
