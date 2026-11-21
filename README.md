@@ -29,3 +29,7 @@ In a Raspberry Pi fleet, build `https://github.com/Armainer/sample-pi-wifi-scann
 Open `http://<pi-address>:8080/`. If the fleet firewall is on, allow TCP port 8080 on the Security tab.
 
 The database password in `docker-compose.yml` is the sample password `wifi-survey`. Anyone who can read this repository can see it. Change it before you use this project for anything other than a trial.
+
+## Licence
+
+MIT. You can use, change, and ship this sample, including in your own product. Keep the copyright notice from `LICENSE` in copies of the code.
