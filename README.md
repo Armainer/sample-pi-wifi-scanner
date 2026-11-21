@@ -1,6 +1,8 @@
 # Pi Wi-Fi scanner
 
-Scans nearby Wi-Fi networks from a Raspberry Pi and shows them on a web page. A scan runs when the container starts, then about once a minute. The page stores the results in Postgres. Clear, at the bottom of the page, deletes the stored networks. The Pi stays connected to its own network.
+This is sample code to test deployment and builds in Armainer. It is not an application to keep. When a build reaches the machine, switch the fleet to your own repository.
+
+The sample scans nearby Wi-Fi networks from a Raspberry Pi and shows them on a web page. A scan runs when the container starts, then about once a minute. The page stores the results in Postgres. Clear, at the bottom of the page, deletes the stored networks. The Pi stays connected to its own network.
 
 The scanner reads `wlan0` and does not change the association.
 
@@ -18,11 +20,11 @@ Do not use this sample on these fleets. The radio and the interface name are dif
 - Banana Pi BPI-M5
 - Generic x86 mini PC
 
-For those fleets, start with [Armainer/hello](https://github.com/Armainer/hello).
+For those fleets, start with [Armainer/sample-hello](https://github.com/Armainer/sample-hello).
 
 ## Run it
 
-In a Raspberry Pi fleet, build `https://github.com/Armainer/pi-wifi-scanner.git` on branch `main`.
+In a Raspberry Pi fleet, build `https://github.com/Armainer/sample-pi-wifi-scanner.git` on branch `main`.
 
 Open `http://<pi-address>:8080/`. If the fleet firewall is on, allow TCP port 8080 on the Security tab.
 
